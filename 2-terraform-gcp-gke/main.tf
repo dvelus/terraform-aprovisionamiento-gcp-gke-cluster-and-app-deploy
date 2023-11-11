@@ -16,3 +16,7 @@ resource "google_container_cluster" "primary" {
     disk_size_gb = var.project_cluster_config.node_config.disk_size_gb
   }
 }
+
+output "gke_name" {
+  value = google_container_cluster.primary.name
+}

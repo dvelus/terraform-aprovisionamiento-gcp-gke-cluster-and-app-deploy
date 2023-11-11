@@ -18,5 +18,5 @@ resource "google_project_service" "enable-api" {
 }
 
 output "project_id" {
-  value = google_project.my_project.id
+  value = split("/", google_project.my_project.id)[1]
 }

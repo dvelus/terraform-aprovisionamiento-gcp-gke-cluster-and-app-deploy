@@ -2,9 +2,10 @@ data "google_client_config" "provider" {
 }
 
 data "google_container_cluster" "my_cluster" {
-  project  = "sandbox-13-252"
-  name     = "sandbox-cluster-v1"
-  location = "us-central1"
+  project    = module.gcp-project.project_id
+  name       = module.gcp-gke.gke_name
+  location   = var.project_location
+  depends_on = [module.gcp-gke]
 }
 
 provider "kubernetes" {
