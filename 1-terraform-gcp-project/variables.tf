@@ -1,4 +1,5 @@
 variable "sandbox_id" {
+  #env variable
   default = ""
 }
 
