@@ -1,17 +1,18 @@
 resource "google_container_cluster" "primary" {
-  project  = "sandbox-13-252"
-  name     = "sandbox-cluster-v1"
-  location = "us-central1"
+  project  = var.project_id
+  name     = "${var.sandbox_id}-cluster-v1"
+  location = var.project_location
 
-  deletion_protection = false
+  deletion_protection      = var.project_cluster_config.deletion_protection
+  remove_default_node_pool = var.project_cluster_config.remove_default_node_pool
+  initial_node_count       = var.project_cluster_config.initial_node_count
 
-  remove_default_node_pool = false
-  initial_node_count       = 1
   gateway_api_config {
-    channel = "CHANNEL_STANDARD"
+    channel = var.project_cluster_config.gateway_api_config.channel
   }
+
   node_config {
-    machine_type = "e2-standard-2"
-    disk_size_gb = 50
+    machine_type = var.project_cluster_config.node_config.machine_type
+    disk_size_gb = var.project_cluster_config.node_config.disk_size_gb
   }
 }
